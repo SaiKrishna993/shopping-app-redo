@@ -1,0 +1,22 @@
+h1.jumbotron User | Orders
+
+.container
+  .row
+    .col-12.card
+      table.table
+        thead
+          th User
+          th Product
+          th Quantity
+          th Order Time
+          th Active
+
+        tbody
+        - @orders.each do |order|
+          tr
+            td #{ order.user.email }
+            td #{ order.product.try(:name) }
+            td #{ order.quantity }
+            td #{ order.created_at.getlocal.strftime("%e-%m-%y %H:%M") }
+            td #{ order.cancel }
+            td = link_to 'Cancel', order_path(order), method: :delete

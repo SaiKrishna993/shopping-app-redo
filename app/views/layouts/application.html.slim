@@ -1,0 +1,29 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title ShoppingAppRedo
+    = csrf_meta_tags
+    = include_gon
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    .navbar
+      .container
+        - unless user_signed_in? || admin_signed_in?
+          .navlink = link_to 'Shop Login', new_admin_session_path  
+          .navlink = link_to 'User Login', new_user_session_path
+        - if user_signed_in?
+          .navlink = link_to 'Home', products_path
+          .navlink = link_to 'Cart (' + "#{current_user.cart_count}" + ')', cart_path
+          .navlink = link_to 'Orders', orders_path
+          .navlink = link_to "Logout(#{current_user.email})", destroy_user_session_path
+        - if admin_signed_in?
+          h4 Shop
+          .navlink = link_to 'Products', admin_products_path
+          .navlink = link_to 'Orders', admin_orders_path
+          .navlink = link_to "Logout(#{current_admin.email})", destroy_admin_session_path
+
+    - flash.each do |name, msg|
+       = content_tag :div, msg, class: name
+    = yield

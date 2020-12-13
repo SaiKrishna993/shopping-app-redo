@@ -1,0 +1,6 @@
+h1.jumbotron #{ @product.name.capitalize }
+.container
+  .card
+    .card-body
+      p = @product.description
+      p <small> SGD </small> #{ @product.price }
