@@ -18,5 +18,5 @@ h1.jumbotron User | Orders
             td #{ order.product.try(:name) }
             td #{ order.quantity }
             td #{ order.created_at.getlocal.strftime("%e-%m-%y %H:%M") }
-            td #{ order.cancel }
+            td #{ !order.cancel }
             td = link_to 'Cancel', order_path(order), method: :delete

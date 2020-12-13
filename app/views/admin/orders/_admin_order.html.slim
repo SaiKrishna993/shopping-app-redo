@@ -3,5 +3,5 @@ tr
   td #{ admin_order.product.try(:name) }
   td #{ admin_order.quantity }
   td #{ admin_order.created_at.getlocal.strftime("%e-%m-%y %H:%M") }
-  td #{ admin_order.caccel }
+  td #{ admin_order.cancel }
   td = link_to 'Cancel', admin_order_path(admin_order), method: :delete

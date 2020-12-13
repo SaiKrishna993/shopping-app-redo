@@ -8,6 +8,7 @@ class TransactionsController < ApplicationController
 
     def create
       current_user.purchase_cart_products!
+      UserMailer.with(user: current_user.email).order_create_email
       flash[:notice] = "Congratulations! We'll try to get you your items as soon as possible!"
       redirect_to root_url
     end
